@@ -86,7 +86,7 @@ Widget build(BuildContext context) {
                         onPressed: ()
                         {
                           print("signup");
-                          signUp();
+                          Navigator.of(context).pushNamed(AppRoutes.login);
                         },
 
                         child: Text(AppStrings.signup,

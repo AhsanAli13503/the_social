@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 48, width: 250,
                        child: ElevatedButton(
                         onPressed: (){
-                                    signIn();
+                                    Navigator.of(context).pushNamed(AppRoutes.registration);
                                       print("login");    
                                       },
                         child: Text(AppStrings.login,
