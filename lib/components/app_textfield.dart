@@ -5,38 +5,26 @@ import '../styles/colors.dart';
 class AppTextField extends StatelessWidget {
   final String hintText;
   final bool secure;
-  final controller;
-   AppTextField({
-    Key? key,
-    required this.hintText,
-     this.controller, required this.secure, 
-  }) : super(key: key);
 
+  final ValueChanged<String> onChangeValue;
+
+  const AppTextField({Key? key, required this.hintText, required this.secure, required this.onChangeValue}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChangeValue,
       obscureText: secure,
-                  controller: controller ,
-                  decoration: InputDecoration(
-                   hintText: hintText,  
-                   labelText: hintText,
-                   labelStyle: TextStyle( 
-                    color: MyColors.white
-                   ),
-                    border: UnderlineInputBorder(  
-                      borderRadius: BorderRadius.all(Radius.circular(12))
-                    ),
-                   filled: true,
-                   focusedBorder:UnderlineInputBorder(
-                    borderSide: BorderSide( 
-                      color: Colors.transparent
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(12))
-                   ),
-                   fillColor: MyColors.fieldColor,
-                   ),     
-                    );
-
+      // controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        labelText: hintText,
+        labelStyle: TextStyle(color: MyColors.white),
+        border: UnderlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+        filled: true,
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(12))),
+        fillColor: MyColors.fieldColor,
+      ),
+    );
   }
 }

@@ -2,62 +2,54 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class AuthServices extends ChangeNotifier{
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class AuthServices extends ChangeNotifier {
+  AuthServices({
+    required this.firebaseAuth,
+    required this.fireStore,
+  });
 
-    Future<UserCredential> signinwithEmailandPassword(
-      String email, String password)async {
-      try{
-        UserCredential userCredential = 
-        await _firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-         );
+  final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore fireStore;
 
-          _firestore.collection('users').doc(userCredential.user!.uid)
-          .set({
-                'uid': userCredential.user!.uid,
-                'email': email
-               }, SetOptions(merge: true));
+  Future<UserCredential> signWithEmailPassword(String email, String password) async {
+    try {
+      UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
+      fireStore.collection('users').doc(userCredential.user!.uid).set({'uid': userCredential.user!.uid, 'email': email}, SetOptions(merge: true));
 
-         return userCredential;
-      }
-      on FirebaseAuthException catch (e)
-      {
-        throw Exception(e.code);
-      }    
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
     }
+  }
 
-    Future<UserCredential> signUpwtihEmailandPassword(
-      String email,
-      password ) async{
-        try {
-          print("${email}");
-          UserCredential userCredential =
-           await _firebaseAuth.createUserWithEmailAndPassword
-           (email: email,
-            password: password
-            );
+  Future<UserCredential> signUpwtihEmailandPassword(String email, password) async {
+    try {
+      UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+        email: "ahsanali3174@gmail.com",
+        password: "Test@3174",
+      );
 
-            _firestore.collection('users').
-            doc(userCredential.user!.uid).set({
-              'uid': userCredential.user!.uid,
-              'email': email
-            });
-            
-            return userCredential;
-        } on FirebaseAuthException catch(e){
-          throw Exception(e.code);
+      fireStore.collection('users').doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': email,
+      });
 
-        }
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      // create a logic for showing SnackBar learn
+      //
 
+      throw ShowErrorMessageException();
     }
+  }
 
-    Future<void> signOut() async {
-      return await FirebaseAuth.instance.signOut();
-    }
-
-
+  Future<void> signOut() async {
+    return await FirebaseAuth.instance.signOut();
+  }
 }
+
+class ShowErrorMessageException implements Exception {}
