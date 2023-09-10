@@ -26,31 +26,58 @@ class AuthServices extends ChangeNotifier {
     }
   }
 
-  Future<UserCredential> signUpwtihEmailandPassword(String email, password) async {
-    try {
-      UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(
-        email: "ahsanali3174@gmail.com",
-        password: "Test@3174",
-      );
+  // Future<UserCredential> signUpwtihEmailandPassword(String email, String password) async {
+  //   try {
+  //     UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+  //       email: "ahsanali3174@gmail.com",
+  //       password: "Test@3174",
+  //     );
 
-      fireStore.collection('users').doc(userCredential.user!.uid).set({
-        'uid': userCredential.user!.uid,
-        'email': email,
-      });
+  //     fireStore.collection('users').doc(userCredential.user!.uid).set({
+  //       'uid': userCredential.user!.uid,
+  //       'email': email,
+  //     });
 
-      return userCredential;
-    // ignore: unused_catch_clause
-    } on FirebaseAuthException catch (e) {
-      // create a logic for showing SnackBar learn
+  //     return userCredential;
+  //   // ignore: unused_catch_clause
+  //   } on FirebaseAuthException catch (e) {
+  //     // create a logic for showing SnackBar learn
+  //     print("FirebaseAuthException: ${e.code} - ${e.message}");
       
+  //     throw ShowErrorMessageException(e.message);
+  //   }
+  // }
+  Future<UserCredential> signUpwtihEmailandPassword(String email, String password) async {
+  try {
+    UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-      throw ShowErrorMessageException();
+    // User successfully registered.
+    fireStore.collection('users').doc(userCredential.user!.uid).set({
+      'uid': userCredential.user!.uid,
+      'email': email,
+    });
+
+    return userCredential;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'email-already-in-use') {
+      // Handle the case where the email is already registered.
+      throw ShowErrorMessageException("Email already registered.");
+    } else {
+      // Handle other FirebaseAuth exceptions.
+      print("FirebaseAuthException: ${e.code} - ${e.message}");
+      throw ShowErrorMessageException("Registration failed. Please try again later.");
     }
   }
+}
 
   Future<void> signOut() async {
     return await FirebaseAuth.instance.signOut();
   }
 }
 
-class ShowErrorMessageException implements Exception {}
+class ShowErrorMessageException implements Exception {
+  ShowErrorMessageException(String? message);
+}

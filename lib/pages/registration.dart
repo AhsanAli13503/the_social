@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socially/components/app_routes.dart';
+import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/sevices/auth_services.dart';
 import '../components/app_strings.dart';
-import '../components/app_textfield.dart';
 
 class Registration extends StatefulWidget {
   final void Function()? onTap;
@@ -25,10 +26,11 @@ class _RegistrationState extends State<Registration> {
 
     final authService = Provider.of<AuthServices>(context, listen: false);
     try {
-      authService.signUpwtihEmailandPassword(
+      await authService.signUpwtihEmailandPassword(
         emailController.text,
         passwordController.text,
       );
+      Navigator.of(context).pushNamed(AppRoutes.main);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
@@ -60,29 +62,17 @@ class _RegistrationState extends State<Registration> {
                     SizedBox(height: 50),
                     // AppTextField(hintText: AppStrings.username, secure: false ),
                     //SizedBox(height: 16,),
-                    AppTextField(
-                      hintText: AppStrings.email,
-                      secure: false,
-                      onChangeValue: (String value) {},
-                    ),
+                    LoginSignupText(hintText: AppStrings.email, controller: emailController, secure: false),
                     SizedBox(
                       height: 16,
                     ),
                     //  AppTextField(hintText: AppStrings.phoneNumber, secure: false ),
                     // SizedBox(height: 16,),
-                    AppTextField(
-                      hintText: AppStrings.password,
-                      secure: true,
-                      onChangeValue: (String value) {},
-                    ),
+                    LoginSignupText(hintText: AppStrings.password, controller: passwordController, secure: true),
                     SizedBox(
                       height: 16,
                     ),
-                    AppTextField(
-                      hintText: AppStrings.cnfrmpswd,
-                      secure: true,
-                      onChangeValue: (String value) {},
-                    ),
+                     LoginSignupText(hintText: AppStrings.cnfrmpswd, controller: confirmPasswordController, secure: true),
                     SizedBox(
                       height: 32,
                     ),
@@ -112,7 +102,7 @@ class _RegistrationState extends State<Registration> {
                         SizedBox(width: 4),
                         GestureDetector(
                           onTap: () {
-                            widget.onTap?.call();
+                            Navigator.of(context).pushNamed(AppRoutes.login);
                           },
                           child: const Text("Login now",
                               style: TextStyle(
