@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socially/components/app_routes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
+import 'package:socially/pages/main_pag.dart';
 import 'package:socially/sevices/auth_services.dart';
 import '../components/app_icons.dart';
 import '../components/app_strings.dart';
@@ -25,7 +26,12 @@ class _LoginPageState extends State<LoginPage> {
       await authService.signWithEmailPassword(
         emailController.text,
         passcontroller.text,
+
       );
+       // Navigate to the home page on successful sign-in.
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MainPage()));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }

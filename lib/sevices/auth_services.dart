@@ -39,9 +39,10 @@ class AuthServices extends ChangeNotifier {
       });
 
       return userCredential;
+    // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
       // create a logic for showing SnackBar learn
-      //
+      
 
       throw ShowErrorMessageException();
     }

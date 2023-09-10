@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/auth_services.dart';
 import '../components/app_routes.dart';
 import '../components/app_strings.dart';
@@ -27,6 +28,10 @@ class _ProfilePageState extends State<ProfilePage> {
 void signOut(){
    final authService = Provider.of<AuthServices>(context, listen: false);
    authService.signOut();
+   // Navigate to the login page after signing out.
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()));
 }
 
   @override
