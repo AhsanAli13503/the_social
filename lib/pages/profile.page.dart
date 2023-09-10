@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socially/pages/editPage.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/auth_services.dart';
-import '../components/app_routes.dart';
 import '../components/app_strings.dart';
 import '../components/toolbar.dart';
 import '../components/user_Avatar.dart';
@@ -39,14 +39,18 @@ void signOut(){
   Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: MyColors.backgroundColor.withBlue(7),
-      appBar: Toolbar( 
-        title: AppStrings.profile,
+      appBar: AppBar( 
+        backgroundColor: MyColors.backgroundColor,
+        centerTitle: true,
+        title: Text(AppStrings.profile),
         actions: [  
           PopupMenuButton<ProfileMenu>(
             onSelected: (value) {
               switch (value)  {
                 case ProfileMenu.settings :
-                Navigator.of(context).pushNamed(AppRoutes.editProfile);
+                Navigator.pushReplacement(
+                 context,
+                 MaterialPageRoute(builder: (context) => editPage()));
                  break;
                 case ProfileMenu.logout:
                 signOut();
@@ -56,7 +60,7 @@ void signOut(){
             itemBuilder: (context){
               return [ 
                 PopupMenuItem(
-                child: Text("Ediiit"), value: ProfileMenu.settings,
+                child: Text("Edit Profile"), value: ProfileMenu.settings,
                 ),
                 PopupMenuItem(
                 child: Text("Logout"), value: ProfileMenu.logout,

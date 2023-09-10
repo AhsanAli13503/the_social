@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socially/components/app_textfield.dart';
 import 'package:socially/components/app_strings.dart';
-import 'package:socially/components/toolbar.dart';
 import 'package:socially/components/user_Avatar.dart';
+import 'package:socially/pages/main_pag.dart';
 import 'package:socially/styles/colors.dart';
 import 'package:socially/styles/text.dart';
 
@@ -24,9 +24,12 @@ class _editPageState extends State<editPage> {
   Widget build(BuildContext context){
     return Scaffold(  
         backgroundColor: MyColors.backgroundColor,
-        appBar: Toolbar(  
-          title: AppStrings.editProfile,
-          actions: [], ),
+        appBar: AppBar(
+          backgroundColor: MyColors.backgroundColor,
+          centerTitle: true,
+          automaticallyImplyLeading: true,
+          title: Text(AppStrings.editProfile),
+           ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -126,7 +129,11 @@ class _editPageState extends State<editPage> {
                                              height: 45, width: 120,
                                             child: Expanded(
                                              child: ElevatedButton(
-                                               onPressed: () {}, 
+                                               onPressed: () {
+                                                Navigator.pushReplacement(
+                                                   context,
+                                                   MaterialPageRoute(builder: (context) => MainPage()));
+                                               }, 
                                                child: Text(  
                                                 AppStrings.save,
                                                style:  TextStyle( 
