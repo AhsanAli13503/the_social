@@ -1,6 +1,6 @@
 
 import 'package:socially/pages/chat/chat_page.dart';
-import 'package:socially/pages/edit_page.dart';
+import 'package:socially/pages/editPage.dart';
 import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/pages/map_page.dart';
@@ -19,7 +19,7 @@ class AppRoutes{
         '/map' : (context) => MyMap(),
         '/registration' : (context) => Registration(),
         '/chat' : (context) => ChatPage(),
-        'edit_profile' :(context) => editProfilePage(),
+        'edit_Profile' : (context) => editPage(),
         '/messages' : (context) => Messages(),
 
   };

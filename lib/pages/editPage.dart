@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import '../components/app_strings.dart';
-import '../components/app_textfield.dart';
-import '../components/toolbar.dart';
-import '../components/user_Avatar.dart';
-import '../styles/colors.dart';
-import '../styles/text.dart';
+import 'package:socially/components/app_textfield.dart';
+import 'package:socially/components/app_strings.dart';
+import 'package:socially/components/toolbar.dart';
+import 'package:socially/components/user_Avatar.dart';
+import 'package:socially/styles/colors.dart';
+import 'package:socially/styles/text.dart';
 
 enum Gender{ none, male, female }
 
-class editProfilePage extends StatefulWidget {
+// ignore: camel_case_types
+class editPage extends StatefulWidget {
+  const editPage({super.key});
+
 
   @override
-  State<editProfilePage> createState() => _editProfilePageState();
+  State<editPage> createState() => _editPageState();
 }
 
-class _editProfilePageState extends State<editProfilePage> {
+class _editPageState extends State<editPage> {
  var gender = Gender.none;
 
   @override

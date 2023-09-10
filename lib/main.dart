@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:socially/sevices/auth_services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'components/app_routes.dart';
-import 'pages/main_pag.dart';
 import 'styles/colors.dart';
 
 void main() async {
@@ -42,7 +41,6 @@ class MyApp extends StatelessWidget {
           routes: AppRoutes.pages,
         );
       },
-      child: MainPage(),
     );
   }
 }

@@ -9,6 +9,7 @@ class ChatPage extends StatelessWidget {
      
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: MyColors.backgroundColor,
           centerTitle: true,
           title: Text("Chat"),

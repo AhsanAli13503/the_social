@@ -25,6 +25,7 @@ const ProfilePage({ Key? key }) : super(key: key);
 
 class _ProfilePageState extends State<ProfilePage> {
   
+  
 void signOut(){
    final authService = Provider.of<AuthServices>(context, listen: false);
    authService.signOut();

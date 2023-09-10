@@ -16,7 +16,7 @@ class Toolbar extends StatelessWidget  implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context){
     return  AppBar(
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
         title: Text(
           title,
           style: AppText.header2,
