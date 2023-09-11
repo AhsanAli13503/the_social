@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:socially/components/app_icons.dart';
 import 'package:socially/styles/colors.dart';
 
 class SearchPage extends StatefulWidget {
@@ -37,6 +36,7 @@ class _SearchPageState extends State<SearchPage> {
                 children: [
                   Expanded(
                     child: TextField(
+                      cursorColor: Colors.black,
                       controller: searchTextEditingController,
                       decoration: InputDecoration(
                         hintText: 'Search',
@@ -58,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: Image.asset(AppIcons.ic_profile),
+                    
                   ),
                 ],
                 ),

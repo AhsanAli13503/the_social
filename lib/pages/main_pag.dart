@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socially/pages/chat/chat_page.dart';
+import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/profile.page.dart';
 import 'package:socially/pages/search_page.dart';
 import '../components/app_icons.dart';
@@ -36,9 +37,9 @@ class _MainPageState extends State<MainPage> {
 }
 
 final pages = [
-    SearchPage(),
+    HomePage(),
     Center(child:Text(AppStrings.favourites),),
-    Center(child: Text("hgfdgh"),),
+    SearchPage(),
     ChatPage(),
     ProfilePage(),
 ];
