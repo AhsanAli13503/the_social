@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:socially/components/app_routes.dart';
 import 'package:socially/components/app_strings.dart';
 import 'package:socially/components/post_item.dart';
-import 'package:socially/components/toolbar.dart';
 import 'package:socially/sevices/auth_services.dart';
 import 'package:socially/styles/colors.dart';
 
