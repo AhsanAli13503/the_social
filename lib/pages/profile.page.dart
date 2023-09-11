@@ -39,6 +39,7 @@ void signOut(){
     return Scaffold(
       backgroundColor: MyColors.backgroundColor.withBlue(7),
       appBar: AppBar( 
+        automaticallyImplyLeading: false,
         backgroundColor: MyColors.backgroundColor,
         centerTitle: true,
         title: Text(AppStrings.profile),

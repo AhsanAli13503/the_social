@@ -39,6 +39,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: MyColors.backgroundColor.withBlue(7),
       appBar: AppBar(
+
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: MyColors.backgroundColor,
         title: Text(AppStrings.appName),

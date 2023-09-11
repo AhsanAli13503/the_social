@@ -27,7 +27,7 @@ class _editPageState extends State<editPage> {
         appBar: AppBar(
           backgroundColor: MyColors.backgroundColor,
           centerTitle: true,
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
           title: Text(AppStrings.editProfile),
            ),
           body: SingleChildScrollView(
