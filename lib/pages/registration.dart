@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:socially/components/app_routes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/sevices/auth_services.dart';
+import 'package:socially/sevices/database.dart';
 import '../components/app_strings.dart';
 
 class Registration extends StatefulWidget {
@@ -14,6 +15,10 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -29,8 +34,16 @@ class _RegistrationState extends State<Registration> {
       await authService.signUpwtihEmailandPassword(
         emailController.text,
         passwordController.text,
-      );
+      ).then((value) {
+
+          Map<String, String> userInfoMap ={
+            "name" : usernameController.text,
+            "email" : emailController.text,
+          };
+
+        databaseMethods.uploaduserInfo(userInfoMap);
       Navigator.of(context).pushNamed(AppRoutes.main);
+      });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
@@ -64,6 +77,10 @@ class _RegistrationState extends State<Registration> {
                     //SizedBox(height: 16,),
                     LoginSignupText(hintText: AppStrings.email, controller: emailController, secure: false),
                     SizedBox(
+                      height: 16,
+                    ),
+                     LoginSignupText(hintText: AppStrings.username, controller: usernameController, secure: false),
+                     SizedBox(
                       height: 16,
                     ),
                     //  AppTextField(hintText: AppStrings.phoneNumber, secure: false ),
