@@ -10,14 +10,14 @@ class ChatAvatar extends StatelessWidget {
       onTap: () {
            Navigator.of(context).pushNamed(AppRoutes.messages);
       },
-      child: SizedBox(
+      child: const SizedBox(
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15),
-              child: UserAvatar(size: 45),
+              padding: EdgeInsets.only(top: 15, left: 15),
+              child:  UserAvatar(size: 45),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Column(
               children: [
                 SizedBox(height: 15),

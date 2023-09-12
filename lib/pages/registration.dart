@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socially/components/app_routes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
+import 'package:socially/pages/main_pag.dart';
 import 'package:socially/sevices/auth_services.dart';
 import 'package:socially/sevices/database.dart';
 import '../components/app_strings.dart';
@@ -42,7 +43,9 @@ class _RegistrationState extends State<Registration> {
           };
 
         databaseMethods.uploaduserInfo(userInfoMap);
-      Navigator.of(context).pushNamed(AppRoutes.main);
+           Navigator.pushReplacement(context, MaterialPageRoute
+           (builder: (context) => MainPage()
+           ));
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
