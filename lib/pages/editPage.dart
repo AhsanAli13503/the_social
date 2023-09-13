@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socially/components/AppStrings.dart';
 import 'package:socially/components/AppTextField.dart';
@@ -34,23 +35,26 @@ class _EditPageState extends State<EditPage> {
                 children: [  
                       Stack(
                         children: [  
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: UserAvatar(size: 120),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right : 0,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(  
-                                  color: MyColors.primary,
-                                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: Icon(Icons.edit,
-                                size: 20,
-                                color: Colors.black,
-                                ))),          
+                       Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: CupertinoButton(
+                       onPressed: (){},
+                   child: UserAvatar(size: 120),
+              )
+              ),
+                 Positioned(
+                    bottom: 0,
+                    right : 10,
+                child: Container(
+                      padding: const EdgeInsets.all(6),
+                     decoration: BoxDecoration(  
+                     color: MyColors.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+                  child: Icon(Icons.edit,
+                  size: 20,
+                  color: Colors.black,
+                    ))),          
                       ],),  
 
                       SizedBox(height: 60),

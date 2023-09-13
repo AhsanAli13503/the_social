@@ -1,9 +1,11 @@
+// ignore_for_file: unused_local_variable
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
-import 'package:socially/pages/MainPage.dart';
-import 'package:socially/sevices/auth_services.dart';
+import 'package:socially/models/UserModel.dart';
 import '../components/AppIcons.dart';
 import '../components/AppStrings.dart';
 
@@ -19,23 +21,66 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passcontroller = TextEditingController();
 
-  void signIn() async {
-    final authService = Provider.of<AuthServices>(context, listen: false);
+  // void signIn() async {
+  //   final authService = Provider.of<AuthServices>(context, listen: false);
 
-    try {
-      await authService.signWithEmailPassword(
-        emailController.text,
-        passcontroller.text,
+  //   try {
+  //     await authService.signWithEmailPassword(
+  //       emailController.text,
+  //       passcontroller.text,
 
-      );
-       // Navigate to the home page on successful sign-in.
-     Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const MainPage()));
-    } catch (e) {
-     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+  //     );
+  //      // Navigate to the home page on successful sign-in.
+  //    Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const MainPage()));
+  //   } catch (e) {
+  //    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+  //   }
+  // }
+      void CheckValues() {
+    String email = emailController.text.trim();
+    String password = passcontroller.text.trim();
+    if (email == "" || password == "" ) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all the fields :(")));
     }
+    else{
+      signIn(email, password);
+    }
+    }
+
+    void signIn(String email, String password) async { 
+      UserCredential? credential;
+      try{
+         credential =  await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password);
+      }catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      }
+
+     if (credential != null) {
+       String uid = credential.user!.uid;
+
+      DocumentSnapshot userData = await FirebaseFirestore.instance
+      .collection("user")
+      .doc(uid)
+      .get();
+
+  if (userData.exists) {
+    // Check if the document exists before trying to access its data
+    UserModel userModel = UserModel.fromMap(
+        userData.data() as Map<String, dynamic>
+    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in")));
+  } else {
+    // Handle the case where the document doesn't exist
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User data not found")));
   }
+}
+
+
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         // Navigator.of(context).pushNamed(AppRoutes.main);
                         //   print("login");
-
-                        signIn();
+                        CheckValues();
                       },
                       child: const Text(AppStrings.login, style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
