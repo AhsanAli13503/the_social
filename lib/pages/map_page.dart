@@ -2,8 +2,8 @@ import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import '../components/app_icons.dart';
-import '../components/app_strings.dart';
+import '../components/AppIcons.dart';
+import '../components/AppStrings.dart';
 import '../components/toolbar.dart';
 
 

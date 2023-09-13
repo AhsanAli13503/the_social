@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socially/components/app_routes.dart';
+import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/pages/MainPage.dart';
 import 'package:socially/sevices/auth_services.dart';
-import '../components/app_icons.dart';
-import '../components/app_strings.dart';
+import '../components/AppIcons.dart';
+import '../components/AppStrings.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -29,11 +29,11 @@ class _LoginPageState extends State<LoginPage> {
 
       );
        // Navigate to the home page on successful sign-in.
-    Navigator.pushReplacement(
+     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MainPage()));
+      MaterialPageRoute(builder: (context) => const MainPage()));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -41,30 +41,30 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color.fromARGB(26, 41, 71, 255),
+        backgroundColor: const Color.fromARGB(26, 41, 71, 255),
         body: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 68,
                   ),
-                  Text(AppStrings.helloWelcome,
+                  const Text(AppStrings.helloWelcome,
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     AppStrings.logintoContinue,
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   LoginSignupText(
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: AppStrings.email,
                     secure: false,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   LoginSignupText(
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: AppStrings.password,
                     secure: true,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                           AppStrings.forgotpassword,
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 32,
                   ),
 
@@ -109,13 +109,13 @@ class _LoginPageState extends State<LoginPage> {
 
                         signIn();
                       },
-                      child: Text(AppStrings.login, style: TextStyle(color: Colors.black)),
+                      child: const Text(AppStrings.login, style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
                       ),
                     ),
                   ),
-                  SizedBox(height: 62),
+                  const SizedBox(height: 62),
                   TextButton(
                       onPressed: () {
                         print("other opt clicked");
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
                       ),
-                      child: Text(AppStrings.orsignInWith)),
+                      child: const Text(AppStrings.orsignInWith)),
                   SizedBox(
                     height: 48,
                     width: 250,
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         print("Google is clicked");
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -140,12 +140,12 @@ class _LoginPageState extends State<LoginPage> {
                             height: 25,
                             width: 25,
                           ),
-                          Text(AppStrings.loginWithGoogle, style: TextStyle(color: Colors.black)),
+                          const Text(AppStrings.loginWithGoogle, style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   SizedBox(
                     height: 48,
                     width: 250,
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         print("Facebook is clicked");
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50)))),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50)))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -162,12 +162,12 @@ class _LoginPageState extends State<LoginPage> {
                             height: 22,
                             width: 22,
                           ),
-                          Text(AppStrings.loginwithFacebook, style: TextStyle(color: Colors.black)),
+                          const Text(AppStrings.loginwithFacebook, style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
 
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                           ),
-                          child: Text(AppStrings.signup, style: TextStyle(color: Colors.amber))),
+                          child: const Text(AppStrings.signup, style: TextStyle(color: Colors.amber))),
                     ],
                   )
                 ]),

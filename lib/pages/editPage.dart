@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:socially/components/app_textfield.dart';
-import 'package:socially/components/app_strings.dart';
+import 'package:socially/components/AppTextField.dart';
+import 'package:socially/components/AppStrings.dart';
 import 'package:socially/components/user_Avatar.dart';
 import 'package:socially/pages/MainPage.dart';
 import 'package:socially/styles/colors.dart';

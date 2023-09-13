@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:socially/pages/editPage.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/auth_services.dart';
-import '../components/app_strings.dart';
+import '../components/AppStrings.dart';
 import '../components/user_Avatar.dart';
 import '../styles/colors.dart';
 import '../styles/text.dart';

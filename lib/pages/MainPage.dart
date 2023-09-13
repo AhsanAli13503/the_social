@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';;
+import 'package:flutter_svg/svg.dart';
 import 'package:socially/pages/home_page.dart';
-import '../components/app_icons.dart';
-import '../components/app_strings.dart';
+import 'package:socially/pages/profile.page.dart';
+import '../components/AppIcons.dart';
+import '../components/AppStrings.dart';
 import '../styles/colors.dart';
 
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+   const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -36,8 +37,8 @@ class _MainPageState extends State<MainPage> {
 final pages = [
     const HomePage(),
     const Center(child:Text(AppStrings.favourites),),
-    SearchPage(userModel: widget.userModel, firebaseUser: widget.firebaseUser);
-    ChatPage(userModel: null, firebaseUser: null,),
+    const Center(child:Text(AppStrings.add),),
+    const Center(child:Text(AppStrings.chat),),
     const ProfilePage(),
 ];
 

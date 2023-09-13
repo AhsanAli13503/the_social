@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:socially/components/app_routes.dart';
 import '../styles/text.dart';
 import 'user_Avatar.dart';
 
 class ChatAvatar extends StatelessWidget {
+  const ChatAvatar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-           Navigator.of(context).pushNamed(AppRoutes.messages);
+        //   Navigator.of(context).pushNamed(AppRoutes.messages);
       },
       child: const SizedBox(
         child: Row(
@@ -17,7 +18,7 @@ class ChatAvatar extends StatelessWidget {
               padding: EdgeInsets.only(top: 15, left: 15),
               child:  UserAvatar(size: 45),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Column(
               children: [
                 SizedBox(height: 15),
@@ -27,7 +28,7 @@ class ChatAvatar extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10),
                   child: Text(
                     "Hey, How u doing!",
                     style: TextStyle(fontSize: 12),
