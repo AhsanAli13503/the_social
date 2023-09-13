@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
+import 'package:socially/pages/editPage.dart';
 import 'package:socially/sevices/auth_services.dart';
+import 'package:socially/sevices/database.dart';
 import '../components/AppStrings.dart';
 
 class Registration extends StatefulWidget {
@@ -19,6 +21,8 @@ class _RegistrationState extends State<Registration> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+    DatabaseMethods databaseMethods = new DatabaseMethods();
+
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match :(")));
@@ -31,12 +35,10 @@ class _RegistrationState extends State<Registration> {
         emailController.text,
         passwordController.text,
       ).then((value) {
-
-          // ignore: unused_local_variable
-          Map<String, String> userInfoMap ={
-            "name" : usernameController.text,
-            "email" : emailController.text,
-          };
+        
+           Navigator.pushReplacement(context, MaterialPageRoute
+           (builder: (context) => EditPage()
+           ));
       });
     } catch (e) {
       // ignore: use_build_context_synchronously
@@ -80,6 +82,7 @@ class _RegistrationState extends State<Registration> {
                     const SizedBox(
                       height: 32,
                     ),
+
                     SizedBox(
                       height: 48,
                       width: 250,
@@ -94,6 +97,7 @@ class _RegistrationState extends State<Registration> {
                         child: const Text(AppStrings.signup, style: TextStyle(color: Colors.black)),
                       ),
                     ),
+                    
                     const SizedBox(
                       height: 24,
                     ),

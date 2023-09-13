@@ -50,7 +50,7 @@ void signOut(){
                 case ProfileMenu.settings :
                 Navigator.pushReplacement(
                  context,
-                 MaterialPageRoute(builder: (context) => editPage()));
+                 MaterialPageRoute(builder: (context) => const EditPage()));
                  break;
                 case ProfileMenu.logout:
                 signOut();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:socially/components/AppTextField.dart';
 import 'package:socially/components/AppStrings.dart';
+import 'package:socially/components/AppTextField.dart';
 import 'package:socially/components/user_Avatar.dart';
 import 'package:socially/pages/MainPage.dart';
 import 'package:socially/styles/colors.dart';
@@ -8,20 +8,17 @@ import 'package:socially/styles/text.dart';
 
 enum Gender{ none, male, female }
 
-// ignore: camel_case_types
-class editPage extends StatefulWidget {
-  const editPage({super.key});
-
+class EditPage extends StatefulWidget {
+  const EditPage({ Key? key }) : super(key: key);
 
   @override
-  State<editPage> createState() => _editPageState();
+  _EditPageState createState() => _EditPageState();
 }
 
-class _editPageState extends State<editPage> {
- var gender = Gender.none;
-
+class _EditPageState extends State<EditPage> {
+  var gender = Gender.none;
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(  
         backgroundColor: MyColors.backgroundColor,
         appBar: AppBar(
@@ -160,6 +157,5 @@ class _editPageState extends State<editPage> {
                                     
                                      ),
                                     );
-
-                                    }
-                                    }
+  }
+}
