@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socially/components/app_routes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
-import 'package:socially/pages/main_pag.dart';
+import 'package:socially/pages/MainPage.dart';
 import 'package:socially/sevices/auth_services.dart';
 import '../components/app_icons.dart';
 import '../components/app_strings.dart';

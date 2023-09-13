@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socially/components/login_or_signup_page.dart';
-import 'package:socially/pages/main_pag.dart';
+import 'package:socially/pages/MainPage.dart';
 
 class Auth extends StatelessWidget {
   const Auth({Key? key}) : super(key: key);

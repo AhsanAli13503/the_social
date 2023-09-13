@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:socially/pages/chat/chat_page.dart';
+import 'package:flutter_svg/svg.dart';;
 import 'package:socially/pages/home_page.dart';
-import 'package:socially/pages/profile.page.dart';
-import 'package:socially/pages/search_page.dart';
 import '../components/app_icons.dart';
 import '../components/app_strings.dart';
 import '../styles/colors.dart';
@@ -37,11 +34,11 @@ class _MainPageState extends State<MainPage> {
 }
 
 final pages = [
-    HomePage(),
-    Center(child:Text(AppStrings.favourites),),
-    SearchPage(),
-    ChatPage(),
-    ProfilePage(),
+    const HomePage(),
+    const Center(child:Text(AppStrings.favourites),),
+    SearchPage(userModel: widget.userModel, firebaseUser: widget.firebaseUser);
+    ChatPage(userModel: null, firebaseUser: null,),
+    const ProfilePage(),
 ];
 
 enum Menus{ home, favourites, add, chat, profile }
@@ -59,7 +56,7 @@ class MyBottomNavigation extends StatelessWidget{
   Widget build(BuildContext context){
     return Container(
       height: 87,
-      margin: EdgeInsets.all(24),
+      margin: const EdgeInsets.all(24),
       width: 17,
       child: Stack(
         children: [ 
@@ -69,7 +66,7 @@ class MyBottomNavigation extends StatelessWidget{
             top: 17,
             child: Container( 
               height: 70,
-              decoration: BoxDecoration(  
+              decoration: const BoxDecoration(  
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(25)),
               ),
@@ -151,7 +148,7 @@ class MyBottomNavigation extends StatelessWidget{
                       height:64,
                       width: 64,
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: MyColors.primary,
                         shape: BoxShape.circle,
                       ),

@@ -1,25 +1,24 @@
 
-import 'package:socially/pages/chat/chat_page.dart';
 import 'package:socially/pages/editPage.dart';
 import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/pages/map_page.dart';
 import 'package:socially/pages/registration.dart';
 import 'package:socially/sevices/auth_gate.dart';
-import '../pages/main_pag.dart';
+import '../pages/MainPage.dart';
 import '../pages/chat/messages.dart';
 
 class AppRoutes{
   static  final pages = { 
 
-        '/' : (context) => LoginPage(),
+        '/' : (context) => const LoginPage(),
         '/main' : (context) => MainPage(),
-        '/home' : (context) => HomePage(),
-        '/authgate' : (context) => Auth(),
+        '/home' : (context) => const HomePage(),
+        '/authgate' : (context) => const Auth(),
         '/map' : (context) => MyMap(),
-        '/registration' : (context) => Registration(),
-        '/chat' : (context) => ChatPage(),
-        'edit_Profile' : (context) => editPage(),
+        '/registration' : (context) => const Registration(),
+        
+        'edit_Profile' : (context) => const editPage(),
         '/messages' : (context) => Messages(),
 
   };
