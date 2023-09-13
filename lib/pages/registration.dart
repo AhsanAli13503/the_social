@@ -1,9 +1,12 @@
+// ignore_for_file: unused_local_variable
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
-import 'package:socially/pages/editPage.dart';
-import 'package:socially/sevices/auth_services.dart';
+import 'package:socially/models/UserModel.dart';
+import 'package:socially/pages/EditPage.dart';
 import 'package:socially/sevices/database.dart';
 import '../components/AppStrings.dart';
 
@@ -16,36 +19,88 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  final usernameController = TextEditingController();
+  
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
     DatabaseMethods databaseMethods = new DatabaseMethods();
 
-  void signUp() async {
-    if (passwordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match :(")));
-      return;
-    }
+  // void signUp() async {
+  //   String email = emailController.text.trim();
+  //   String password = passwordController.text.trim();
+  //   String confirmPassword = confirmPasswordController.text.trim();
+  //   if (emailController.text.isEmpty || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all the fields :(")));
+  //     return;
+  //   }
+  //   if (passwordController.text != confirmPasswordController.text) {
+  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match :(")));
+  //     return;
+  //   }
 
-    final authService = Provider.of<AuthServices>(context, listen: false);
-    try {
-      await authService.signUpwtihEmailandPassword(
-        emailController.text,
-        passwordController.text,
-      ).then((value) {
+  //   final authService = Provider.of<AuthServices>(context, listen: false);
+  //   try {
+  //     await authService.signUpwtihEmailandPassword(
+  //       emailController.text,
+  //       passwordController.text,
+  //     ).then((value) {
         
-           Navigator.pushReplacement(context, MaterialPageRoute
-           (builder: (context) => EditPage()
-           ));
-      });
-    } catch (e) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-    }
-  }
+  //          Navigator.pushReplacement(context, MaterialPageRoute
+  //          (builder: (context) => EditPage()
+  //          ));
+  //     });
+  //   } catch (e) {
+  //     // ignore: use_build_context_synchronously
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+  //   }
+  // }
+    
+    void CheckValues() {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+    if (emailController.text.isEmpty || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all the fields :(")));
 
+    if(passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match :(")));
+    }
+    }
+    }
+    
+      void  Signup (String email, String password) async {
+      UserCredential? credentials;
+      try{
+      credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      } on FirebaseAuthException catch(e){
+        if(e.code == 'weak-password'){
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("The password provided is too weak.")));
+        } else if (e.code == 'email-already-in-use'){
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("The account already exists for that email.")));
+        }
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+        
+      } 
+      if(credentials != null){
+          String uid = credentials.user!.uid;
+          UserModel newUser = new UserModel(
+            uid: uid,
+            email: email,
+            fullName: "",
+            profilePic: "",
+          );
+          await FirebaseFirestore.instance.collection('user').doc(uid).set(
+            newUser.toMap()).then((value) {
+              Navigator.pushReplacement(context, MaterialPageRoute
+           (builder: (context) => const EditPage()
+           ));
+          });
+          }
+      }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -88,8 +143,9 @@ class _RegistrationState extends State<Registration> {
                       width: 250,
                       child: ElevatedButton(
                         onPressed: () {
-                          print("signup");
-                          signUp();
+                          CheckValues();
+                          Signup(emailController.text, passwordController.text);
+
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber,
@@ -121,5 +177,8 @@ class _RegistrationState extends State<Registration> {
                 ))),
       ),
     );
+
   }
+    
+
 }
