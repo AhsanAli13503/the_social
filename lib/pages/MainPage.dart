@@ -39,7 +39,7 @@ final pages = [
     const Center(child:Text(AppStrings.favourites),),
     const Center(child:Text(AppStrings.add),),
     const Center(child:Text(AppStrings.chat),),
-    const ProfilePage(),
+     ProfilePage(),
 ];
 
 enum Menus{ home, favourites, add, chat, profile }

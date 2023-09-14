@@ -103,8 +103,6 @@ class _RegistrationState extends State<Registration> {
            Navigator.push(context,
            MaterialPageRoute
            (builder: (context) => EditPage(
-            firebaseUser: credentials!.user!,
-            userModel: newUser,
            )
            ));
           });

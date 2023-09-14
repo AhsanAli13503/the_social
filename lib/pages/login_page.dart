@@ -22,13 +22,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passcontroller = TextEditingController();
 
-
-
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     // Check if the user is already authenticated when the page is initialized.
-     Future.microtask(() {
+    Future.microtask(() {
       checkCurrentUser();
     });
   }

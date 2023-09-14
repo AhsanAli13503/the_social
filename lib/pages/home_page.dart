@@ -1,9 +1,12 @@
 // ignore_for_file: must_be_immutable
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/AppStrings.dart';
 import 'package:socially/components/post_item.dart';
+import 'package:socially/pages/map_page.dart';
 import 'package:socially/sevices/auth_services.dart';
 import 'package:socially/styles/colors.dart';
 
@@ -15,6 +18,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+   List<Map<String, dynamic>> posts = []; // List to store posts
+
+  @override
+  void initState() {
+    super.initState();
+    loadPostsData(); 
+  }
+
+
+  Future<void> loadPostsData() async {
+    // Load the JSON data from the assets
+    final String postsJson = await rootBundle.loadString('assets/posts.json');
+    final List<dynamic> postsData = json.decode(postsJson);
+
+    setState(() {
+      posts = List<Map<String, dynamic>>.from(postsData);
+    });
+  }
+
   void signOut() {
     final authService = Provider.of<AuthServices>(context, listen: false);
     authService.signOut();
@@ -22,17 +45,13 @@ class _HomePageState extends State<HomePage> {
 
   List<String> users = [];
 
-  @override
-  void initState() {
-    super.initState();
-    mockUsersFromServer();
-  }
+  
 
-  mockUsersFromServer() {
-    for (var i = 0; i < 100; i++) {
-      users.add('User number $i');
-    }
-  }
+  // mockUsersFromServer() {
+  //   for (var i = 0; i < 100; i++) {
+  //     users.add('User number $i');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,24 +66,28 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.map);
+              Navigator.push(context,
+           MaterialPageRoute
+           (builder: (context) => MyMap(
+           )
+           ));
             },
             icon: Icon(Icons.location_on_outlined),
           ),
         ],
       ),
-      body: ListView.separated(
+     body: ListView.builder(
         itemBuilder: (context, index) {
+          final post = posts[index];
+
           return PostItem(
-            user: users[index],
+            user: post['user'] ?? '',
+            image: post['image'] ?? '',
+            description: post['description'] ?? '',
+            post: post['posts'] ?? '',
           );
         },
-        itemCount: users.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 24,
-          );
-        },
+        itemCount: posts.length,
       ),
     );
   }

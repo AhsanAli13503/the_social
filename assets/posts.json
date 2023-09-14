@@ -1,0 +1,45 @@
+[
+    {
+        "user": "Shoaib",
+        "image": "assets/temp/dp.jpeg",
+        "description": "This is post 1 description.",
+        "likes": 150,
+        "posts": "assets/temp/post2.jpg"
+    },
+    {
+        "user": "Aafiyah",
+        "image": "assets/temp/dp1.png",
+        "description": "This is post 2 description.",
+        "likes": 15,
+        "posts": "assets/temp/post1.jpg"
+    },
+    {
+        "user": "Ariba",
+        "image": "assets/temp/dp2.png",
+        "description": "This is post 3 description.",
+        "likes": 20,
+        "posts": "assets/temp/posts4.jpg"
+    },
+    {
+        "user": "Bilal",
+        "image": "assets/temp/dp3.png",
+        "description": "This is post 4 description.",
+        "likes": 5,
+        "posts": "assets/temp/quotes2.jpg"
+
+    },
+    {
+        "user": "Ubaid",
+        "image": "assets/temp/dp4.png",
+        "description": "This is post 4 description.",
+        "likes": 5,
+        "posts": "assets/temp/posts5.jpg"
+    },
+    {
+        "user": "Fayyaz",
+        "image": "assets/temp/dp5.png",
+        "description": "This is post 4 description.",
+        "likes": 5,
+        "posts": "assets/temp/posts6.jpg"
+    }
+]

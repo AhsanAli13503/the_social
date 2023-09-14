@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; // Import Cupertino library
-import 'package:socially/components/user_Avatar.dart';
+import 'package:flutter/cupertino.dart'; // Import Cuper
 import 'package:socially/styles/text.dart';
 
-class PostItem extends StatelessWidget {
+class PostItem extends StatefulWidget {
   final String user;
+  final String image;
+  final String description;
+  final String post;
 
   const PostItem({
     Key? key,
     required this.user,
+    required this.image,
+    required this.description, required this.post,
   }) : super(key: key);
+
+  @override
+  _PostItemState createState() => _PostItemState();
+}
+
+class _PostItemState extends State<PostItem> {
+  bool isLiked = false; // Maintain the liked state here
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +35,29 @@ class PostItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              UserAvatar(size: 60),
+              Image.asset(
+               widget.image,
+                fit : BoxFit.cover,
+                height: 30,
+                width: 30,
+                ),
               SizedBox(width: 16),
               Text(
-                user,
+                widget.user,
                 style: AppText.subtitle1.copyWith(fontWeight: FontWeight.bold),
               ),
             ],
           ),
           SizedBox(height: 16),
           Image.asset(
-            'assets/temp/dp.jpg',
+            widget.post,
             height: 300,
             width: 500,
             fit: BoxFit.cover,
           ),
           SizedBox(height: 16),
           Text(
-            "You should just not give up. Try harder, Every next day is gonna be your best day. I Swear",
+            widget.description,
             style: AppText.subtitle3,
           ),
           SizedBox(height: 16),
@@ -51,12 +67,15 @@ class PostItem extends StatelessWidget {
               children: [
                 CupertinoButton(
                   onPressed: () {
-                    // Handle favorite action
+                    // Toggle the liked state when the button is pressed
+                    setState(() {
+                      isLiked = !isLiked;
+                    });
                   },
                   padding: EdgeInsets.zero,
                   child: Icon(
-                    Icons.favorite,
-                    color: Colors.white60,
+                    isLiked ? Icons.favorite : Icons.favorite_border,
+                    color: isLiked ? Colors.red : Colors.white60,
                     size: 29,
                   ),
                 ),
