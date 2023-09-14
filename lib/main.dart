@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socially/components/AppRoutes.dart';
+import 'package:socially/components/LoginOrSignupPage.dart';
+import 'package:socially/pages/EditPage.dart';
 import 'package:socially/pages/MainPage.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/auth_services.dart';

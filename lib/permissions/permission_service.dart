@@ -1,4 +1,3 @@
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:permission_handler/permission_handler.dart' as permission_handler show openAppSettings;
 import 'package:permission_handler/permission_handler.dart';
