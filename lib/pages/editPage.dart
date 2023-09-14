@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -97,9 +96,6 @@ class _EditPageState extends State<EditPage> {
     }
     else{
       log("uploading data..");
-      print(widget.userModel.uid);
-      print(widget.userModel.fullName);
-      print(widget.userModel.profilePic);
         uploadData();
 
     } 
@@ -107,17 +103,10 @@ class _EditPageState extends State<EditPage> {
   
 
   void uploadData() async {
-    UploadTask uploadTask = FirebaseStorage.instance
-    .ref("uploads")
-    .child(widget.userModel.uid.toString()).putFile(imageFile!);
     try{
-    TaskSnapshot snapshot = await uploadTask;
 
-    String? imageUrl = await snapshot.ref.getDownloadURL();
     String? fullname = fullNameController.text.trim();
-
     widget.userModel.fullName = fullname;
-    widget.userModel.profilePic = imageUrl;
 
 
     await FirebaseFirestore.instance.collection
@@ -261,8 +250,6 @@ class _EditPageState extends State<EditPage> {
                 child: ElevatedButton(
                   onPressed: () {
                   CheckValues();
-                  print(widget.userModel.fullName);
-                  print(widget.userModel.uid);
                   }, 
                   child: Text(  
                   AppStrings.save,

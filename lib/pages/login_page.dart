@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/models/UserModel.dart';
+import 'package:socially/pages/MainPage.dart';
 import 'package:socially/pages/registration.dart';
 import '../components/AppIcons.dart';
 import '../components/AppStrings.dart';
@@ -21,66 +22,69 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passcontroller = TextEditingController();
 
-  // void signIn() async {
-  //   final authService = Provider.of<AuthServices>(context, listen: false);
 
-  //   try {
-  //     await authService.signWithEmailPassword(
-  //       emailController.text,
-  //       passcontroller.text,
 
-  //     );
-  //      // Navigate to the home page on successful sign-in.
-  //    Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => const MainPage()));
-  //   } catch (e) {
-  //    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-  //   }
-  // }
-      void CheckValues() {
+  @override
+  void initState()  {
+    super.initState();
+    // Check if the user is already authenticated when the page is initialized.
+     Future.microtask(() {
+      checkCurrentUser();
+    });
+  }
+
+  void checkCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // User is already authenticated, navigate to MainPage.
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainPage()),
+      );
+    }
+  }
+
+  void CheckValues() {
     String email = emailController.text.trim();
     String password = passcontroller.text.trim();
-    if (email == "" || password == "" ) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all the fields :(")));
-    }
-    else{
+    if (email == "" || password == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please fill all the fields :(")));
+    } else {
       signIn(email, password);
     }
-    }
-
-    void signIn(String email, String password) async { 
-      UserCredential? credential;
-      try{
-         credential =  await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password);
-      }catch(e){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-      }
-
-     if (credential != null) {
-       String uid = credential.user!.uid;
-
-      DocumentSnapshot userData = await FirebaseFirestore.instance
-      .collection("user")
-      .doc(uid)
-      .get();
-
-  if (userData.exists) {
-    // Check if the document exists before trying to access its data
-    UserModel userModel = UserModel.fromMap(
-        userData.data() as Map<String, dynamic>
-    );
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in")));
-  } else {
-    // Handle the case where the document doesn't exist
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User data not found")));
   }
-}
 
-
+  void signIn(String email, String password) async {
+    UserCredential? credential;
+    try {
+      credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
+
+    if (credential != null) {
+      String uid = credential.user!.uid;
+
+      DocumentSnapshot userData =
+          await FirebaseFirestore.instance.collection("user").doc(uid).get();
+
+      if (userData.exists) {
+// Check if the document exists before trying to access its data
+        UserModel userModel =
+            UserModel.fromMap(userData.data() as Map<String, dynamic>);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MainPage()));
+      } else {
+// Handle the case where the document doesn't exist
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("User data not found")));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +157,8 @@ class _LoginPageState extends State<LoginPage> {
                         //   print("login");
                         CheckValues();
                       },
-                      child: const Text(AppStrings.login, style: TextStyle(color: Colors.black)),
+                      child: const Text(AppStrings.login,
+                          style: TextStyle(color: Colors.black)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
                       ),
@@ -175,7 +180,12 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         print("Google is clicked");
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -184,7 +194,8 @@ class _LoginPageState extends State<LoginPage> {
                             height: 25,
                             width: 25,
                           ),
-                          const Text(AppStrings.loginWithGoogle, style: TextStyle(color: Colors.black)),
+                          const Text(AppStrings.loginWithGoogle,
+                              style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ),
@@ -197,7 +208,11 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         print("Facebook is clicked");
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50)))),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -206,7 +221,8 @@ class _LoginPageState extends State<LoginPage> {
                             height: 22,
                             width: 22,
                           ),
-                          const Text(AppStrings.loginwithFacebook, style: TextStyle(color: Colors.black)),
+                          const Text(AppStrings.loginwithFacebook,
+                              style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ),
@@ -227,15 +243,15 @@ class _LoginPageState extends State<LoginPage> {
                       TextButton(
                           onPressed: () {
                             Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                            builder: (context) => Registration()));
-                                              
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Registration()));
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                           ),
-                          child: const Text(AppStrings.signup, style: TextStyle(color: Colors.amber))),
+                          child: const Text(AppStrings.signup,
+                              style: TextStyle(color: Colors.amber))),
                     ],
                   )
                 ]),
