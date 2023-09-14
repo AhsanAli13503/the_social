@@ -1,5 +1,6 @@
 
 import 'package:socially/pages/home_page.dart';
+// ignore: unused_import
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/pages/map_page.dart';
 import 'package:socially/pages/registration.dart';
