@@ -13,6 +13,9 @@ class AppStrings{
   static const donthaveAccount = "Don't have account?";
   static const signup = "Signup";
   static const gender = "Gender";
+  static const pleaseFillAllFields = "Please Fill All Fields";
+  static const takePhoto = "Capture Photo";
+  static const chooseFromGallery = "Choose From Gallery";
   static const home = "Home";
   static String myName = "";
   static const cnfrmpswd = "Confirm Password";

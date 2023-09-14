@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socially/pages/editPage.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/auth_services.dart';
 import '../components/AppStrings.dart';
@@ -48,9 +47,7 @@ void signOut(){
             onSelected: (value) {
               switch (value)  {
                 case ProfileMenu.settings :
-                Navigator.pushReplacement(
-                 context,
-                 MaterialPageRoute(builder: (context) => const EditPage()));
+                print("Edit pressed");
                  break;
                 case ProfileMenu.logout:
                 signOut();

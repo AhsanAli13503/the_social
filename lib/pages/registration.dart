@@ -1,12 +1,13 @@
 // ignore_for_file: unused_local_variable
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/models/UserModel.dart';
 import 'package:socially/pages/EditPage.dart';
+import 'package:socially/pages/login_page.dart';
 import 'package:socially/sevices/database.dart';
 import '../components/AppStrings.dart';
 
@@ -66,6 +67,10 @@ class _RegistrationState extends State<Registration> {
     if(passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match :(")));
     }
+    
+    }
+    else{
+      Signup(email, password);
     }
     }
     
@@ -95,8 +100,12 @@ class _RegistrationState extends State<Registration> {
           );
           await FirebaseFirestore.instance.collection('user').doc(uid).set(
             newUser.toMap()).then((value) {
-              Navigator.pushReplacement(context, MaterialPageRoute
-           (builder: (context) => const EditPage()
+           Navigator.push(context,
+           MaterialPageRoute
+           (builder: (context) => EditPage(
+            firebaseUser: credentials!.user!,
+            userModel: newUser,
+           )
            ));
           });
           }
@@ -144,8 +153,6 @@ class _RegistrationState extends State<Registration> {
                       child: ElevatedButton(
                         onPressed: () {
                           CheckValues();
-                          Signup(emailController.text, passwordController.text);
-
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber,
@@ -164,7 +171,11 @@ class _RegistrationState extends State<Registration> {
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushNamed(AppRoutes.login);
+                           Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(
+                          builder:(context) => LoginPage())
+                          );
                           },
                           child: const Text("Login now",
                               style: TextStyle(

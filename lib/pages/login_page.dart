@@ -3,9 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:socially/components/AppRoutes.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
 import 'package:socially/models/UserModel.dart';
+import 'package:socially/pages/registration.dart';
 import '../components/AppIcons.dart';
 import '../components/AppStrings.dart';
 
@@ -226,7 +226,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.registration);
+                            Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => Registration()));
+                                              
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,

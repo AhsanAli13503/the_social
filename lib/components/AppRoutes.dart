@@ -1,4 +1,4 @@
-import 'package:socially/pages/EditPage.dart';
+
 import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/login_page.dart';
 import 'package:socially/pages/map_page.dart';
@@ -9,17 +9,14 @@ import '../pages/MainPage.dart';
 class AppRoutes{
   static  final pages = { 
 
-        '/' : (context) => const LoginPage(),
         '/main' : (context) =>const MainPage(),
         '/home' : (context) => const HomePage(),
         '/authgate' : (context) => const Auth(),
-        'editProfile' : (context) => const EditPage(),
         '/map' : (context) => MyMap(),
         '/registration' : (context) => const Registration(),
 
   };
 
-       static  const login = '/';
        static  const  home = '/home';
        static  const main = '/main';
        static  const editProfile = '/edit_Profile';
