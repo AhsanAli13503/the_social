@@ -1,7 +1,6 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:injectable/injectable.dart';
-import 'package:super_booking_consumer/core/network_calls/dio_wrapper/index.dart';
-import 'package:super_booking_consumer/core/utils/utitily_methods/utils.dart';
 
 abstract class LocalImagePicker {
   /// This method returns the image path picked from gallery
@@ -14,7 +13,6 @@ abstract class LocalImagePicker {
   Future<String> getImageFromCamera(CameraDevice cameraDevice);
 }
 
-@LazySingleton(as: LocalImagePicker)
 class LocalImagePickerImpl implements LocalImagePicker {
   final ImagePicker imagePicker;
 
@@ -29,7 +27,7 @@ class LocalImagePickerImpl implements LocalImagePicker {
     if (image != null) {
       return image.path;
     }
-    throw UnableToPickImage();
+    throw Exception();
   }
 
   @override
@@ -39,17 +37,23 @@ class LocalImagePickerImpl implements LocalImagePicker {
     );
 
     if (image!.path.endsWith('png') || image.path.endsWith('jpg') || image.path.endsWith('jpeg')) {
-      final fileSizeInBytes = await Utility.getFileSize(image.path);
+      final fileSizeInBytes = await getFileSize(image.path);
       final fileSizeInKB = fileSizeInBytes / 1000;
       final fileSizeInMB = fileSizeInKB / 1000;
 
       if (fileSizeInMB > 5) {
-        throw const FileTooBigFailure('file_too_big');
+        throw Exception('file_too_big');
       }
 
       return image.path;
     }
 
-    throw const InvalidFileFormat('invalid_file_format');
+    throw Exception('invalid_file_format');
+  }
+
+  Future<int> getFileSize(String path) async {
+    final fileBytes = await File(path).readAsBytes();
+
+    return fileBytes.lengthInBytes;
   }
 }
