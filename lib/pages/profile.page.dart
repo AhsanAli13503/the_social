@@ -1,5 +1,3 @@
-// ProfilePage.dart
-
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
@@ -42,7 +40,8 @@ class _ProfilePageState extends State<ProfilePage> {
     // Navigate to the map page when PINDI is tapped.
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MyMap()), // Replace with the actual MapPage.
+      MaterialPageRoute(
+          builder: (context) => MyMap()), // Replace with the actual MapPage.
     );
   }
 
@@ -95,21 +94,22 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: UserAvatar(size: 120),
+            child: UserAvatar(size: 110),
           ),
           Text(
             "John Doe",
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 10),
           Text(
-            "ICAT PROJECT",
+            "TRYING TO DO OUR LEVEL BEST",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 14,
               color: Colors.white,
+              fontWeight: FontWeight.w300,
             ),
           ),
           SizedBox(height: 10),
@@ -124,11 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: MyColors.primary,
                 ),
                 Text(
-                  "PINDI",
+                  "New York",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline, // Add underline to make it look clickable
                   ),
                 ),
               ],
@@ -147,6 +146,102 @@ class _ProfilePageState extends State<ProfilePage> {
             thickness: 2,
             height: 24,
           ),
+         // Content below the divider
+Expanded(
+  child: ListView.builder(
+    itemCount: 10, // You can adjust this to the number of posts you want
+    itemBuilder: (context, index) {
+      // Define lists of post times and contents
+      final postTimes = [
+        '2 hours ago',
+        '3 hours ago',
+        '4 hours ago',
+        '5 hours ago',
+        '6 hours ago',
+        '7 hours ago',
+        '8 hours ago',
+        '9 hours ago',
+        '10 hours ago',
+        '11 hours ago',
+      ];
+      final postContents = [
+        'This is the first motivational coding quote. Keep coding!',
+        'This is the second inspirational coding quote for you.',
+        'Coding is the key to unlocking your potential.',
+        'Here\'s another coding quote to keep you inspired.',
+        'Stay committed to your code, and success will follow.',
+        'Coding is not just a skill; it\'s an art form.',
+        'Every line of code is a step toward your goals.',
+        'The best way to predict the future is to code it.',
+        'Coding is the language of the future.',
+        'Stay curious and keep coding!',
+      ];
+
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          elevation: 0.0, // No elevation
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          color: Colors.white.withOpacity(0.9), // Slightly transparent background color
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      postTimes[index], // Use the corresponding post time
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    // Three dots menu (you can implement this)
+                    // Here's an example of an overflow menu
+                    PopupMenuButton<String>(
+                      color: Colors.black87,
+                      itemBuilder: (context) => [
+                        PopupMenuItem<String>(
+                          value: 'edit',
+                          child: Text('Edit'),
+                        ),
+                        PopupMenuItem<String>(
+                          value: 'delete',
+                          child: Text('Delete'),
+                        ),
+                      ],
+                      onSelected: (value) {
+                        // Handle menu item selection here
+                        if (value == 'edit') {
+                          // Implement edit action
+                        } else if (value == 'delete') {
+                          // Implement delete action
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Text(
+                  postContents[index], // Use the corresponding post content
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  ),
+),
+
         ],
       ),
     );
@@ -158,14 +253,14 @@ class _ProfilePageState extends State<ProfilePage> {
         Text(
           value,
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           label,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             color: Colors.grey,
           ),
         ),

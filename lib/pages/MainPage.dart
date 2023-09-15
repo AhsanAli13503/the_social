@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:socially/pages/chats/ChatPage.dart';
 import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/profile.page.dart';
 import '../components/AppIcons.dart';
@@ -37,9 +38,9 @@ class _MainPageState extends State<MainPage> {
 final pages = [
     const HomePage(),
     const Center(child:Text(AppStrings.favourites),),
-    const Center(child:Text(AppStrings.add),),
-    const Center(child:Text(AppStrings.chat),),
-     ProfilePage(),
+    ChatPage(),
+    ChatPage(),
+    ProfilePage(),
 ];
 
 enum Menus{ home, favourites, add, chat, profile }

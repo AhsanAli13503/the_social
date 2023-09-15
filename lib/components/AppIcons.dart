@@ -7,6 +7,8 @@ class AppIcons{
 
   static const ic_google = "${_png}google.png";
   static const ic_fb = "${_png}facebook.png";
+  static const messages = "${_png}messages.png";
+  static const calls = "${_png}phone.png";
 
     static const ic_home = "${svg}ic_home.svg";
     static const ic_favorite = "${svg}ic_favorite.svg";
