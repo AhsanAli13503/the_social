@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:socially/styles/colors.dart';
 
-
-
-class ChatApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Chat UI',
-      home: ChatScreen(),
-    );
-  }
-}
-
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   State createState() => ChatScreenState();
 }
@@ -38,10 +27,9 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: MyColors.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.transparent.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 4,
             offset: Offset(0, 2),
@@ -78,9 +66,10 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         elevation: 0.0,
+        automaticallyImplyLeading: true,
         backgroundColor: MyColors.backgroundColor,
+        centerTitle: true,
         title: Text('Message'),
         actions: <Widget>[
           IconButton(
@@ -126,7 +115,7 @@ class ChatMessage extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       decoration: BoxDecoration(
-        color: isUser ? Colors.blue : Colors.grey[200],
+        color: isUser ? Colors.deepPurple : Colors.grey[200],
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(

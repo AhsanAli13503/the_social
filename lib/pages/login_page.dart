@@ -151,8 +151,6 @@ class _LoginPageState extends State<LoginPage> {
                     width: 250,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.of(context).pushNamed(AppRoutes.main);
-                        //   print("login");
                         CheckValues();
                       },
                       child: const Text(AppStrings.login,
@@ -210,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundColor: Colors.white,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50)))),
+                                  BorderRadius.all(Radius.circular(5)))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

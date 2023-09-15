@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:socially/components/FavouritesPage.dart';
+import 'package:socially/pages/SearchPage.dart';
 import 'package:socially/pages/chats/ChatPage.dart';
 import 'package:socially/pages/home_page.dart';
 import 'package:socially/pages/profile.page.dart';
 import '../components/AppIcons.dart';
-import '../components/AppStrings.dart';
 import '../styles/colors.dart';
 
 
@@ -37,8 +38,8 @@ class _MainPageState extends State<MainPage> {
 
 final pages = [
     const HomePage(),
-    const Center(child:Text(AppStrings.favourites),),
-    ChatPage(),
+    FavoritesPage(),
+    SearchPage(),
     ChatPage(),
     ProfilePage(),
 ];

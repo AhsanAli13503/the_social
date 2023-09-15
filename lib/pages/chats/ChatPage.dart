@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socially/pages/chats/ChattApp.dart';
+import 'package:socially/styles/colors.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -61,6 +62,19 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: MyColors.backgroundColor,
+        centerTitle: true,
+        title: Text("Chats",
+        style: TextStyle(color: Colors.white,
+        fontWeight: FontWeight.bold,
+        ),
+      
+        ),
+        ),
+        backgroundColor: MyColors.backgroundColor.withBlue(7),
+      
       body: Padding(
         padding: const EdgeInsets.only(left: 8, top: 25),
         child: Container(
@@ -76,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
             },
           ),
         ),
-      ),
+      )
     );
   }
 }
@@ -111,7 +125,7 @@ class ChatListItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChatApp(),
+                  builder: (context) => ChatScreen(),
                 ),
               );
             },

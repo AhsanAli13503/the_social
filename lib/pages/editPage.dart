@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:socially/components/AppStrings.dart';
 import 'package:socially/components/AppTextField.dart';
 import 'package:socially/components/loginsignuptextfield.dart';
+import 'package:socially/pages/MainPage.dart';
 import 'package:socially/styles/colors.dart';
 import 'package:socially/styles/text.dart';
 
@@ -52,14 +53,11 @@ class _EditPageState extends State<EditPage> {
   }
 
   void saveChanges() {
-    String updatedName = nameController.text;
-    String updatedLocation = locationController.text;
 
     // Send the updated values back to the previous screen
-    Navigator.pop(context, {
-      'name': updatedName,
-      'location': updatedLocation,
-    });
+    Navigator.pushReplacement(context, 
+    MaterialPageRoute(builder: (builder) => MainPage()
+    ));
   }
 
   void showPhotoOptions() {

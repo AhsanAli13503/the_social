@@ -2,19 +2,24 @@ import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:socially/styles/colors.dart';
 import '../components/AppIcons.dart';
-import '../components/AppStrings.dart';
-import '../components/toolbar.dart';
 
 
 class MyMap extends StatelessWidget{
 @override
 Widget build(BuildContext context) {
   return Scaffold( 
-    appBar: const Toolbar(
-      title: AppStrings.nearby,
-      actions: [],
+    appBar: AppBar(
+        backgroundColor: MyColors.backgroundColor,
+      centerTitle: true,
+      automaticallyImplyLeading: true,
+      title: Text("Map",
+      style: TextStyle(  
+        fontWeight: FontWeight.bold,
       ),
+      ),
+    ),
       body: FlutterMap(  
         options: MapOptions(  
           center: const LatLng(33.626750, 73.011041),
