@@ -5,7 +5,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:socially/styles/colors.dart';
 import '../components/AppIcons.dart';
 
-
 class MyMap extends StatelessWidget{
 @override
 Widget build(BuildContext context) {
